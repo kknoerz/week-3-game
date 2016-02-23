@@ -7,7 +7,7 @@
 <body>
 
 <div>
-    <p>Welcome to Hangman, you know the rules! Guess a letter!</p>
+    <p>Welcome to 50-States-Hangman, I would reccomend observing in inspector, then press any key to guess your first letter of a state!</p>
 </div>
 
 <!-- <div>
@@ -42,9 +42,10 @@
 		var wrong = [];
 		var underscore = '_'
 		
-		function checkUnderscore(underscore, stateIndex, i, wordBank) {
+		function checkUnderscore(underscore, correct, unsolved) {
 		return underscore ? true : false;
 		}
+
 			
 
 		for (var i = 0; i < wordBank[state].length; i++) {
@@ -56,9 +57,9 @@
 		// 	return wordBank.every(checkUnderscore);
 		// }
 
-		while (wordBank.every(checkUnderscore)) {	 // This loops guess back around until every word in wordBank is '_'
+		while (unsolved.every(checkUnderscore)) {	 // This loops guess back around until every word in wordBank is '_'
 			 
-			debugger;
+			// debugger;
 			
 			for (var i = 0; i < wordBank[state].length; i++) {
 
@@ -76,7 +77,7 @@
 				if (wordBank[state][i] == guess) { // if you guess correctly
 					correct = wordBank[state].indexOf(guess)
 					unsolved.splice(i, 1, guess)
-					wordBank.splice(state[correct], 1, i)
+					// wordBank[state][i].splice(wordBank[state][i], 1)
 					// document.write('You got the letter: '+guess+' right!')
 					// correct = wordBank.indexOf(guess)
 					console.log('this is index of correct: ', correct)
@@ -89,7 +90,7 @@
 					// }
 				}
 				
-				debugger;
+				// debugger;
 				var html = "<p>Welcome to Hangman, you know the rules! Guess a letter!</p>" +
 		        "<p>Here's your word so far: " + 
 		        unsolved + 
@@ -104,20 +105,31 @@
 			
 			}
 			
-			if (correct == -1 && wordBank.every(checkUnderscore)) { //if there are no more of your guessed letter
-				guess = prompt('You\'ve got: ' +unsolved+ ' correct, guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
-				// guess = prompt('guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
+			if (correct == -1 && wordBank.every(checkUnderscore) && wrong.length > 0) { 
+				guess = document.write('You guessed incorrectly, guess again', String.fromCharCode(event.keyCode).toLowerCase());
+				// guess = document.write('guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
 			}
 
-			guess = prompt('You guessed incorrectly, guess again', String.fromCharCode(event.keyCode).toLowerCase());
+			if (guess == null) {
+				guess = document.write('You didn\'t guess anything! Guess again!', String.fromCharCode(event.keyCode).toLowerCase());
+			}
+			//if there are no more of your correctly guessed letters
+			if (wordBank[state] !== unsolved.join('')) {
+			guess = document.write('You\'ve got: ' +unsolved.join('')+ ' correct, guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
+			}
 
+			if (wordBank[state] == unsolved.join('')) {
+				alert('You win, yay')
+				break;
+			}
 
 			
 		
-		}
+		
 
 
 		
+		}
 	}
 
 
@@ -159,7 +171,7 @@
 		// 		break;
 		// 	}
 		
-		// guess = prompt('guess another letter');
+		// guess = document.write('guess another letter');
 		// 		console.log('this is your guess after you got one right', guess);
 		// 		console.log('here is the bank again: ', bank)
 		
