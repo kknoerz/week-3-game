@@ -10,17 +10,18 @@
     <p>Welcome to 50-States-Hangman, I would reccomend observing in inspector, then press any key to guess your first letter of a state!</p>
 </div>
 
-<!-- <div>
+<div>
 	<p id="welcome"></p>
 </div>
 
-<button onclick="getStarted()">Click me</button> -->
-
+<button onclick="getStarted()">Click me</button>
 <script type="text/javascript">
+	
 
 	function getStarted() {
     document.getElementById("welcome").innerHTML = html;
 	}
+
 
 	
 	var wordBank = ['alabama','alaska','arizona','arkansas','california','colorado','connecticut','delaware','florida','georgia','hawaii','idaho','illinois','indiana','iowa','kansas','kentucky','louisiana','maine','maryland','massachusetts','michigan','minnesota','mississippi','missouri','montana','nebraska','nevada','new hampshire','new jersey','new mexico','new york','north carolina','north dakota','ohio','oklahoma','oregon','pennsylvania','rhode island','south carolina','south dakota','tennessee','texas','utah','vermont','virginia','washington','west virginia','wisconsin','wyoming'];
@@ -41,6 +42,16 @@
 		// var joinUnsolved = unsolved.join(' ');
 		var wrong = [];
 		var underscore = '_'
+		var html = "<p>Welcome to Hangman, you know the rules! Guess a letter!</p>" +
+		        "<p>Here's your word so far: " + 
+		        unsolved + 
+		        "</p>" +
+		        "<p>EEEEEEEHHHHNTT!! Wrong: " + 
+		        wrong + 
+		        "</p>" +
+		        "<p>You got the letter: " + " right!"
+		        wordBank[state][i] == guess + 
+		        "</p>";
 		
 		function checkUnderscore(underscore, correct, unsolved) {
 		return underscore ? true : false;
@@ -59,7 +70,7 @@
 
 		while (unsolved.every(checkUnderscore)) {	 // This loops guess back around until every word in wordBank is '_'
 			 
-			// debugger;
+			debugger;
 			
 			for (var i = 0; i < wordBank[state].length; i++) {
 
@@ -91,37 +102,28 @@
 				}
 				
 				// debugger;
-				var html = "<p>Welcome to Hangman, you know the rules! Guess a letter!</p>" +
-		        "<p>Here's your word so far: " + 
-		        unsolved + 
-		        "</p>" +
-		        "<p>EEEEEEEHHHHNTT!! Wrong: " + 
-		        wrong + 
-		        "</p>" +
-		        "<p>You got the letter: " + " right!"
-		        wordBank[state][i] == guess + 
-		        "</p>";
 		        
 			
 			}
 			
 			if (correct == -1 && wordBank.every(checkUnderscore) && wrong.length > 0) { 
-				guess = document.write('You guessed incorrectly, guess again', String.fromCharCode(event.keyCode).toLowerCase());
+				guess = prompt('You guessed incorrectly, guess again');
 				// guess = document.write('guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
 			}
 
 			if (guess == null) {
-				guess = document.write('You didn\'t guess anything! Guess again!', String.fromCharCode(event.keyCode).toLowerCase());
+				guess = prompt('You didn\'t guess anything! Guess again!');
 			}
 			//if there are no more of your correctly guessed letters
 			if (wordBank[state] !== unsolved.join('')) {
-			guess = document.write('You\'ve got: ' +unsolved.join('')+ ' correct, guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
+			guess = prompt('You\'ve got: ' +unsolved.join('')+ ' correct, guess another letter');
 			}
 
 			if (wordBank[state] == unsolved.join('')) {
 				alert('You win, yay')
-				break;
+				
 			}
+		
 
 			
 		
