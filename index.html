@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<title>Hangman</title>
+</head>
+<body>
+
+<div>
+    <p>Welcome to Hangman, you know the rules! Guess a letter!</p>
+</div>
+
+<!-- <div>
+	<p id="welcome"></p>
+</div>
+
+<button onclick="getStarted()">Click me</button> -->
+
+<script type="text/javascript">
+
+	function getStarted() {
+    document.getElementById("welcome").innerHTML = html;
+	}
+
+	
+	var wordBank = ['alabama','alaska','arizona','arkansas','california','colorado','connecticut','delaware','florida','georgia','hawaii','idaho','illinois','indiana','iowa','kansas','kentucky','louisiana','maine','maryland','massachusetts','michigan','minnesota','mississippi','missouri','montana','nebraska','nevada','new hampshire','new jersey','new mexico','new york','north carolina','north dakota','ohio','oklahoma','oregon','pennsylvania','rhode island','south carolina','south dakota','tennessee','texas','utah','vermont','virginia','washington','west virginia','wisconsin','wyoming'];
+	
+
+	
+	
+
+	document.onkeyup = function(event) {
+
+		var state = wordBank[Math.floor(Math.random() * wordBank.length)];
+		var state = wordBank.indexOf(state)
+		console.log('this is your word to start: ', wordBank[state])
+		
+		var guess = String.fromCharCode(event.keyCode).toLowerCase();
+		var correct = wordBank[state].indexOf(guess)
+		var unsolved = []
+		// var joinUnsolved = unsolved.join(' ');
+		var wrong = [];
+		var underscore = '_'
+		
+		function checkUnderscore(underscore, stateIndex, i, wordBank) {
+		return underscore ? true : false;
+		}
+			
+
+		for (var i = 0; i < wordBank[state].length; i++) {
+			unsolved.push('_');
+		}
+
+
+		// function checkFunction() {
+		// 	return wordBank.every(checkUnderscore);
+		// }
+
+		while (wordBank.every(checkUnderscore)) {	 // This loops guess back around until every word in wordBank is '_'
+			 
+			debugger;
+			
+			for (var i = 0; i < wordBank[state].length; i++) {
+
+				console.log('iterating over this letter now: ', wordBank[state][i])
+				console.log('this is your guess: ' +guess)
+				correct = wordBank[state].indexOf(guess)
+				
+				
+
+				if (correct == -1 && unsolved.indexOf(guess) == -1) {  // if you guess incorrectly 
+						correct = wordBank[state].indexOf(guess)
+						wrong.splice(0, 0, guess);	
+				}
+
+				if (wordBank[state][i] == guess) { // if you guess correctly
+					correct = wordBank[state].indexOf(guess)
+					unsolved.splice(i, 1, guess)
+					wordBank.splice(state[correct], 1, i)
+					// document.write('You got the letter: '+guess+' right!')
+					// correct = wordBank.indexOf(guess)
+					console.log('this is index of correct: ', correct)
+					console.log('this is your forming unsolved word: ', unsolved);
+					
+					// if (correct !== -1) {
+					// 	wordBank.splice(correct, 1)
+					// 	correct = wordBank.indexOf(guess) //This updates the index so you're not falling behind by one for each instance while iterating
+						console.log('this is wordBank after splice: ', wordBank[state])
+					// }
+				}
+				
+				debugger;
+				var html = "<p>Welcome to Hangman, you know the rules! Guess a letter!</p>" +
+		        "<p>Here's your word so far: " + 
+		        unsolved + 
+		        "</p>" +
+		        "<p>EEEEEEEHHHHNTT!! Wrong: " + 
+		        wrong + 
+		        "</p>" +
+		        "<p>You got the letter: " + " right!"
+		        wordBank[state][i] == guess + 
+		        "</p>";
+		        
+			
+			}
+			
+			if (correct == -1 && wordBank.every(checkUnderscore)) { //if there are no more of your guessed letter
+				guess = prompt('You\'ve got: ' +unsolved+ ' correct, guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
+				// guess = prompt('guess another letter', String.fromCharCode(event.keyCode).toLowerCase());
+			}
+
+			guess = prompt('You guessed incorrectly, guess again', String.fromCharCode(event.keyCode).toLowerCase());
+
+
+			
+		
+		}
+
+
+		
+	}
+
+
+		// while (correct !== -1) {
+	 //  		bank = bank + guess;
+	 //  		console.log('here are the letters you have in the bank: ', bank);
+	 //  		word = word.replace(guess, '');
+	 //  		console.log('here\'s what\'s left of your word: ', word);
+	 //  		correct = word.indexOf(guess);
+	 //  		console.log('the next index of the letter you guessed is: ', correct);
+		// 	console.log('this is your word after you guessed correctly: ', word);
+				
+			
+
+			// alert('You\'re letter: ' + guess + ' was correct');
+
+			
+			// if (correct == -1 && bank.indexOf(guess) == -1) {
+			// 		alert('oops, try again')
+			// 		wrong = wrong + guess;
+			// 		console.log('these are the words you got wrong: ', wrong);				
+			// 	// if (guess == null) {
+			// 	// 	break;
+			// 	// }
+			// }
+
+			// console.log('this is what your word is now: ', wordBank);
+			// console.log('this is your guess after you got one wrong', guess);
+			// console.log('these are the words you got wrong: ', wrong);
+
+
+
+			// console.log('This is whether your guess exists in bank: ', bank.indexOf(guess));
+	
+			// console.log('here is the global bank: ', bank);
+	
+			
+		// 	if (guess == null) {
+		// 		break;
+		// 	}
+		
+		// guess = prompt('guess another letter');
+		// 		console.log('this is your guess after you got one right', guess);
+		// 		console.log('here is the bank again: ', bank)
+		
+		
+		// if (guess == null) {
+		// 		break;
+		// 	} 
+		
+
+	// }
+
+// var animal - listOfAnimals [Math.floor(Math.random() * listOfAnimals.length)]; 
+
+
+
+
+
+
+
+
+	</script>
+</body>
+</html>
